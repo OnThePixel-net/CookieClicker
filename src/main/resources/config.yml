@@ -107,10 +107,12 @@ playerCache:
 
 storage:
   # The type of storage to use. You have the following options:
-  # "SQLite" | "MySQL"
+  # "SQLite" | "MySQL" | "MongoDB"
   type: "SQLite"
 
   # This section is only relevant if you use a remote database
+  # For MySQL: port defaults to 3306
+  # For MongoDB: port defaults to 27017
   host: "localhost"
   port: 3306
   database: "cookieclicker"

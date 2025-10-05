@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.zetaplugins.cookieclickerz.storage.MongoDBStorage;
 import com.zetaplugins.cookieclickerz.storage.MySQLStorage;
 import com.zetaplugins.cookieclickerz.util.*;
 import com.zetaplugins.cookieclickerz.util.achievements.AchievementManager;
@@ -135,6 +136,9 @@ public final class CookieClickerZ extends JavaPlugin {
             case "mysql":
                 getLogger().info("Using MySQL storage");
                 return new MySQLStorage(this);
+            case "mongodb":
+                getLogger().info("Using MongoDB storage");
+                return new MongoDBStorage(this);
             case "sqlite":
             default:
                 getLogger().info("Using SQLite storage");
