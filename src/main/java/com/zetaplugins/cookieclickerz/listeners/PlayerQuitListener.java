@@ -25,6 +25,7 @@ public class PlayerQuitListener implements Listener {
         if (playerData == null) return;
 
         playerData.setLastLogoutTime(System.currentTimeMillis());
-        storage.save(playerData);
+        // Save directly to database and remove from cache when player leaves
+        storage.saveAndRemoveFromCache(playerData);
     }
 }

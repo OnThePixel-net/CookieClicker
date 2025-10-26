@@ -12,9 +12,6 @@ import com.zetaplugins.cookieclickerz.util.achievements.AchievementManager;
 import com.zetaplugins.cookieclickerz.util.cookieevents.CookieEventManager;
 import com.zetaplugins.cookieclickerz.storage.Storage;
 import com.zetaplugins.cookieclickerz.storage.SQLiteStorage;
-import com.zetaplugins.cookieclickerz.util.holograms.DecentHologramManager;
-import com.zetaplugins.cookieclickerz.util.holograms.FancyHologramManager;
-import com.zetaplugins.cookieclickerz.util.holograms.HologramManager;
 
 import java.util.List;
 
@@ -25,7 +22,6 @@ public final class CookieClickerZ extends JavaPlugin {
     private LanguageManager languageManager;
     private ConfigManager configManager;
     private AntiCheat antiCheat;
-    private HologramManager hologramManager;
     private ClickerManager clickerManager;
     private CookieEventManager cookieEventManager;
     private AchievementManager achievementManager;
@@ -53,17 +49,6 @@ public final class CookieClickerZ extends JavaPlugin {
         cookieEventManager = new CookieEventManager(this);
         achievementManager = new AchievementManager(this);
 
-        if (hasFancyHolograms) {
-            getLogger().info("FancyHolograms found! Using FancyHolograms for holograms.");
-            hologramManager = new FancyHologramManager(this);
-            hologramManager.spawnAllHolograms();
-        } else if (hasDecentHolograms) {
-            getLogger().info("DecentHolograms found! Using DecentHolograms for holograms.");
-            hologramManager = new DecentHologramManager(this);
-            hologramManager.spawnAllHolograms();
-        } else {
-            getLogger().warning("No hologram plugin found! Holograms will not be displayed.");
-        }
 
         if (hasPlaceholderApi()) {
             PapiExpansion papiExpansion = new PapiExpansion(this);
@@ -83,7 +68,6 @@ public final class CookieClickerZ extends JavaPlugin {
     @Override
     public void onDisable() {
         storage.saveAllCachedData();
-        if (hologramManager != null) hologramManager.removeAllHolograms();
         getLogger().info("CookieClickerZ disabled!");
     }
 
@@ -115,9 +99,6 @@ public final class CookieClickerZ extends JavaPlugin {
         return antiCheat;
     }
 
-    public HologramManager getHologramManager() {
-        return hologramManager;
-    }
 
     public ClickerManager getClickerManager() {
         return clickerManager;

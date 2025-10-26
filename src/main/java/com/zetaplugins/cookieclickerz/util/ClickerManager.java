@@ -28,7 +28,6 @@ public class ClickerManager {
         clickerConfig.set(name + ".name", name);
         clickerConfig.set(name + ".location", clicker);
         configManager.saveCustomConfig("clicker", clickerConfig);
-        if (plugin.getHologramManager() != null) plugin.getHologramManager().spawnHologram(new Clicker(name, CookieClickerZ.stringToLocation(clicker)));
     }
 
     /**
@@ -82,7 +81,6 @@ public class ClickerManager {
         if (clickerConfig == null) return;
         clickerConfig.set(name, null);
         configManager.saveCustomConfig("clicker", clickerConfig);
-        if (plugin.getHologramManager() != null) plugin.getHologramManager().removeHologram(name);
     }
 
     /**

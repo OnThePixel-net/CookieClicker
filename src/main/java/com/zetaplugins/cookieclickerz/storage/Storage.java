@@ -83,4 +83,11 @@ public abstract class Storage {
      * Save all cached data to the storage system.
      */
     abstract public void saveAllCachedData();
+
+    /**
+     * Save a player data object directly to the database and remove it from cache.
+     * This is called when a player leaves the server.
+     * @param playerData The player data object to save.
+     */
+    abstract public void saveAndRemoveFromCache(PlayerData playerData);
 }

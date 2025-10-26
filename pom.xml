@@ -116,18 +116,13 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/releases/</url>
         </repository>
-        <repository>
-            <id>fancyinnovations-releases</id>
-            <name>FancyInnovations Repository</name>
-            <url>https://repo.fancyinnovations.com/releases</url>
-        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.20.6-R0.1-SNAPSHOT</version>
+            <version>1.21.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -155,12 +150,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>de.oliver</groupId>
-            <artifactId>FancyHolograms</artifactId>
-            <version>2.5.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>6.2.1</version>
@@ -179,6 +168,11 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
             <version>5.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 </project>

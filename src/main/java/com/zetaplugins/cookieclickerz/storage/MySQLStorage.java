@@ -327,4 +327,43 @@ public class MySQLStorage extends SQLStorage {
             getPlugin().getLogger().log(Level.SEVERE, "Failed to flush player data cache: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void saveAndRemoveFromCache(PlayerData playerData) {
+        if (playerData == null) return;
+
+        final String query = "INSERT INTO players (uuid, name, totalCookies, totalClicks, lastLogoutTime, cookiesPerClick, offlineCookies, prestige) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE " +
+                "name = VALUES(name), " +
+                "totalCookies = VALUES(totalCookies), " +
+                "totalClicks = VALUES(totalClicks), " +
+                "lastLogoutTime = VALUES(lastLogoutTime), " +
+                "cookiesPerClick = VALUES(cookiesPerClick), " +
+                "offlineCookies = VALUES(offlineCookies), " +
+                "prestige = VALUES(prestige)";
+
+        try (Connection connection = createConnection()) {
+            if (connection == null) return;
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, playerData.getUuid().toString());
+                statement.setString(2, playerData.getName());
+                statement.setString(3, playerData.getTotalCookies().toString());
+                statement.setInt(4, playerData.getTotalClicks());
+                statement.setLong(5, playerData.getLastLogoutTime());
+                statement.setString(6, playerData.getCookiesPerClick().toString());
+                statement.setString(7, playerData.getOfflineCookies().toString());
+                statement.setInt(8, playerData.getPrestige());
+                statement.executeUpdate();
+            }
+
+            saveUpgrades(connection, playerData);
+            saveAchievements(connection, playerData);
+
+            // Remove from cache after saving to database
+            playerDataCache.remove(playerData.getUuid());
+        } catch (SQLException e) {
+            getPlugin().getLogger().severe("Failed to save player data to MySQL database: " + e.getMessage());
+        }
+    }
 }
